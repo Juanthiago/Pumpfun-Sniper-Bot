@@ -1,15 +1,15 @@
-import { UserRepositories } from "../../modules/user/repositories/UserRepositories";
+import { userRepositories } from "../../modules/user/repositories/UserRepositories";
 
 class UpdatedUserUseCase {
-  constructor(UserRepositories) {
-    this.UserRepositories = UserRepositories;
+  constructor(userRepositories) {
+    this.userRepositories = userRepositories;
   }
 
   async execute(id, userData) {
-    const user = await this.UserRepositories.findById(id);
+    const user = await this.userRepositories.findById(id);
     if (!user || user.deletedAt) throw new Error("User not found");
 
-    const updatedUser = await this.UserRepositories.update(id, {
+    const updatedUser = await this.userRepositories.update(id, {
       ...userData,
       updatedAt: new Date(),
     });

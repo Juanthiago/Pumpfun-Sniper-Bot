@@ -1,13 +1,13 @@
-import { UserRepositories } from "../../modules/user/repositories/UserRepositories";
+import { userRepositories } from "../../modules/user/repositories/UserRepositories";
 import bcrypt from "bcrypt";
 
 export class CreateUserUseCase {
-  constructor(UserRepositories) {
-    this.UserRepositories = UserRepositories;
+  constructor(userRepositories) {
+    this.userRepositories = userRepositories;
   }
 
   async execute(userData) {
-    const userExists = await this.UserRepositories.findByEmail(userData.email);
+    const userExists = await this.userRepositories.findByEmail(userData.email);
     if (userExists) throw new Error("User already exists");
 
     const hashPassword = await bcrypt.hash(userData.password, 8);
@@ -17,7 +17,7 @@ export class CreateUserUseCase {
       password: hashPassword,
     };
 
-    const createdUser = await this.UserRepositories.create(newUser);
+    const createdUser = await this.userRepositories.create(newUser);
 
     return createdUser;
   }

@@ -1,18 +1,21 @@
 import { userRepositories } from "../../modules/user/repositories/UserRepositories";
 
-export class DeleteUserUseCase {
+class GetUserUseCase {
   constructor(userRepositories) {
     this.userRepositories = userRepositories;
   }
-
   async execute(id) {
-    const user = await this.userRepositories.softDelete(id);
+    const user = await this.userRepositories.findById(id);
     if (!user || user.deletedAt) throw new Error("User not found");
-
-    await this.userRepositories.softDelete(id);
-
     return {
-      message: "User deleted successfully",
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
     };
   }
 }
+
+module.exports = GetUserUseCase;
