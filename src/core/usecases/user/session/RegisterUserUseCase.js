@@ -1,7 +1,7 @@
 import { userRepositories } from "../../modules/user/repositories/UserRepositories";
 import bcrypt from "bcrypt";
 
-export class CreateUserUseCase {
+export class RegisterUserUseCase {
   constructor(userRepositories) {
     this.userRepositories = userRepositories;
   }
