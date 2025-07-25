@@ -1,9 +1,9 @@
-const { v4: uuidv4 } = require("uuid");
+import { v4 as uuidv4 } from "uuid";
 
-class PrismaEmailVerificationTokenRepository {
-  constructor(prisma) {
-    this.prisma = prisma;
-  }
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+
+class EmailVerificationTokenRepository {
   async createToken(userId) {
     const token = uuidv4();
 
@@ -23,4 +23,4 @@ class PrismaEmailVerificationTokenRepository {
   }
 }
 
-module.exports = PrismaEmailVerificationTokenRepository;
+export default EmailVerificationTokenRepository;

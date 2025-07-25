@@ -1,12 +1,14 @@
-class PrismaUserRepositories {
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
+class UserRepositories {
   // cria um usuario
   async create(userData) {
-    return await Prisma.User.create({ data: userData });
+    return await prisma.user.create({ data: userData });
   }
 
   // busca um usuario por id incluindo as relações
   async findById(id) {
-    return await Prisma.User.findByUnique({
+    return await prisma.user.findUnique({
       where: { id, deletedAt: null },
       include: { teams: true, profile: true, tasks: true },
     });
@@ -14,12 +16,12 @@ class PrismaUserRepositories {
 
   // busca um usuario por email
   async findByEmail(email) {
-    return await Prisma.User.findByUnique({ where: { email } });
+    return await prisma.user.findUnique({ where: { email } });
   }
 
   // atualiza um usuario
   async update(id, userData) {
-    return await Prisma.User.update({
+    return await prisma.user.update({
       where: { id },
       data: userData,
     });
@@ -27,7 +29,7 @@ class PrismaUserRepositories {
 
   // atualiza o deletedAt para soft delete
   async softDelete(id) {
-    return await Prisma.User.update({
+    return await prisma.user.update({
       where: { id },
       data: { deletedAt: new Date(), updatedAt: new Date() },
     });
@@ -35,7 +37,7 @@ class PrismaUserRepositories {
 
   // busca usuarios recentes
   async findByRecent(limit = 10) {
-    return await Prisma.User.findMany({
+    return await prisma.user.findMany({
       where: { deletedAt: null },
       orderBy: { createdAt: "desc" },
       take: limit,
@@ -44,11 +46,11 @@ class PrismaUserRepositories {
 
   // busca usuarios por nome
   async findByName(name) {
-    return await Prisma.User.findMany({
+    return await prisma.user.findMany({
       where: { name, deletedAt: null },
       orderBy: { createdAt: "desc" },
     });
   }
 }
 
-module.exports = PrismaUserRepositories;
+export default UserRepositories;

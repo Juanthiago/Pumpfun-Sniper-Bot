@@ -1,6 +1,9 @@
+import UserRepositories from "../../modules/user/repositories/UserRepositories.js";
+import VerifyUserEmailUseCaseRepository from "../../modules/user/repositories/VerifyUserEmailUseCaseRepository.js";
+
 class VerifyUserEmailUseCase {
-  constructor(userRepositories, VerifyUserEmailUseCaseRepository) {
-    this.userRepositories = userRepositories;
+  constructor(UserRepositories, VerifyUserEmailUseCaseRepository) {
+    this.UserRepositories = UserRepositories;
     this.VerifyUserEmailUseCaseRepository = VerifyUserEmailUseCaseRepository;
   }
 
@@ -11,11 +14,11 @@ class VerifyUserEmailUseCase {
 
     if (!tokenData || tokenData.used) throw new Error("Invalid token");
 
-    const user = await this.userRepositories.findById(tokenData.userId);
+    const user = await this.UserRepositories.findById(tokenData.userId);
 
     if (!user || user.deletedAt) throw new Error("User not found");
 
-    const updatedUser = await this.userRepositories.update(tokenData.userId, {
+    const updatedUser = await this.UserRepositories.update(tokenData.userId, {
       ...user,
       emailVerifiedAt: new Date(),
     });
@@ -31,3 +34,5 @@ class VerifyUserEmailUseCase {
     };
   }
 }
+
+export default VerifyUserEmailUseCase;

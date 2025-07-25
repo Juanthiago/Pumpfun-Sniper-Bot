@@ -1,14 +1,16 @@
+import UserRepositories from "../../modules/user/repositories/UserRepositories.js";
+
 class ActiveUserUseCase {
-  constructor(userRepositories) {
-    this.userRepositories = userRepositories;
+  constructor(UserRepositories) {
+    this.UserRepositories = UserRepositories;
   }
   async execute(id, user) {
     if (user.role !== "admin") {
       throw new Error("You are not authorized to active users");
     }
-    const userExists = await this.userRepositories.findById(id);
+    const userExists = await this.UserRepositories.findById(id);
     if (!userExists || userExists.deletedAt) throw new Error("User not found");
-    const activatedUser = await this.userRepositories.activate(id);
+    const activatedUser = await this.UserRepositories.activate(id);
     return {
       message: "User activated successfully",
       user: activatedUser,
@@ -16,4 +18,4 @@ class ActiveUserUseCase {
   }
 }
 
-module.exports = ActiveUserUseCase;
+export default ActiveUserUseCase;

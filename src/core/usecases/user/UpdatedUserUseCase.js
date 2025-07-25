@@ -1,15 +1,15 @@
-import { userRepositories } from "../../modules/user/repositories/UserRepositories";
+import UserRepositories from "../../modules/user/repositories/UserRepositories.js";
 
 class UpdatedUserUseCase {
-  constructor(userRepositories) {
-    this.userRepositories = userRepositories;
+  constructor(UserRepositories) {
+    this.UserRepositories = UserRepositories;
   }
 
   async execute(id, userData) {
-    const user = await this.userRepositories.findById(id);
+    const user = await this.UserRepositories.findById(id);
     if (!user || user.deletedAt) throw new Error("User not found");
 
-    const updatedUser = await this.userRepositories.update(id, {
+    const updatedUser = await this.UserRepositories.update(id, {
       ...userData,
       updatedAt: new Date(),
     });
@@ -23,4 +23,4 @@ class UpdatedUserUseCase {
   }
 }
 
-module.exports = UpdatedUserUseCase;
+export default UpdatedUserUseCase;

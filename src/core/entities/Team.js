@@ -7,4 +7,4 @@ class Team {
     this.deletedAt = deletedAt;
   }
 }
-module.exports = Team;
+export default Team;

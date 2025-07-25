@@ -1,8 +1,6 @@
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 class PasswordResetTokenRepository {
-  constructor() {
-    this.prisma = Prisma;
-  }
-
   async create(userId, token, expiresAt) {
     return await this.prisma.PasswordResetTokenRepository.create({
       data: {
@@ -15,4 +13,4 @@ class PasswordResetTokenRepository {
   }
 }
 
-module.exports = PasswordResetTokenRepository;
+export default PasswordResetTokenRepository;

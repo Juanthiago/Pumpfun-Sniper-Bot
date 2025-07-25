@@ -8,4 +8,5 @@ class Project {
     this.deletedAt = deletedAt;
   }
 }
-module.exports = Project;
+
+export default Project;

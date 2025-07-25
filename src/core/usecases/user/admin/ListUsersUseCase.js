@@ -1,14 +1,16 @@
+import UserRepositories from "../../modules/user/repositories/UserRepositories.js";
+
 class ListUsersUseCase {
-  constructor(userRepositories) {
-    this.userRepositories = userRepositories;
+  constructor(UserRepositories) {
+    this.UserRepositories = UserRepositories;
   }
   async execute(user) {
     if (!user.role === "admin") {
       throw new Error("You are not authorized to list users");
     }
-    const users = await this.userRepositories.findAll();
+    const users = await this.UserRepositories.findAll();
     return users;
   }
 }
 
-module.exports = ListUsersUseCase;
+export default ListUsersUseCase;

@@ -1,15 +1,15 @@
-import { sessionRepositories } from "../../modules/user/repositories/UserRepositories";
+import SessionRepositories from "../../modules/user/repositories/SessionRepositories.js";
 
 class LogoutUserUseCase {
-  constructor(sessionRepositories) {
-    this.sessionRepositories = sessionRepositories;
+  constructor(SessionRepositories) {
+    this.SessionRepositories = SessionRepositories;
   }
 
   async execute(id) {
-    const session = await this.sessionRepositories.findById(id);
+    const session = await this.SessionRepositories.findById(id);
     if (!session || session.deletedAt) throw new Error("Session not found");
 
-    const LogoutUser = await this.sessionRepositories.invalidateSessionForUser(
+    const LogoutUser = await this.SessionRepositories.invalidateSessionForUser(
       userId
     );
     return {
@@ -17,3 +17,5 @@ class LogoutUserUseCase {
     };
   }
 }
+
+export default LogoutUserUseCase;
