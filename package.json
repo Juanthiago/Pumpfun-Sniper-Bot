@@ -1,22 +1,39 @@
 {
-  "name": "zuppo-backend",
+  "name": "pumpfun-sniper-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "Solana sniper bot for Pumpfun liquidity pools",
+  "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "lint": "eslint src --ext .ts"
   },
-  "keywords": [],
+  "keywords": [
+    "solana",
+    "pumpfun",
+    "sniper",
+    "trading-bot",
+    "web3"
+  ],
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^6.11.1",
-    "@prisma/extension-accelerate": "^2.0.2",
-    "bcrypt": "^6.0.0",
-    "fastify": "^5.4.0",
-    "jsonwebtoken": "^9.0.2",
-    "prisma": "^6.11.1",
-    "uuid": "^11.1.0"
+    "@solana/web3.js": "^1.87.6",
+    "@solana/spl-token": "^0.3.9",
+    "axios": "^1.6.2",
+    "bs58": "^5.0.0",
+    "dotenv": "^16.3.1",
+    "ws": "^8.14.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/ws": "^8.5.10",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
   }
 }

@@ -1,0 +1,7 @@
+# Blocklist File
+# Add wallet addresses to block, one per line
+# Lines starting with # are treated as comments and ignored
+# 
+# Example blocked wallets:
+# 7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU
+# 9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM
